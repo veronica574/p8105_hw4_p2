@@ -1,0 +1,22 @@
+---
+title: "p8105_hw4_qw2250"
+author: "Qianshu Wang"
+date: "2017/10/25"
+output: html_document
+---
+In Problems 1 and 2, I worked with Siyuan Ding (UNI: sd3333).
+
+### Problem 1
+
+The GitHub repo containing our solution to this problem is [here](https://github.com/jeff-goldsmith/vbvs.concurrent).
+
+
+### Problem 2
+
+The GitHub repo containing the solution to this problem is [here](https://github.com/julia-wrobel/depthTests)
+
+
+### Problem 3
+
+My personal website is [here](http://jeffgoldsmith.com)
+
