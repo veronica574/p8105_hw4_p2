@@ -1,0 +1,38 @@
+---
+title: "p8105_hw4_p2"
+author: "Qianshu Wang"
+date: "2017/10/28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+library(haven)
+library(janitor)
+library(ggridges, ggthemes)
+```
+
+## Import data
+
+```{r}
+pols_mon = read_csv("./538_datasets/pols-month.csv") %>%
+  clean_names() %>%
+  mutate(date = lubridate::floor_date(mon, "month")) %>%
+  select(-mon)
+
+gdp = read_csv("./538_datasets/GDP.csv") %>%
+  clean_names() %>%
+  mutate(date = lubridate::floor_date(date, "month")) %>%
+  rename(gdp = value)
+```
+
+## Combine two datasets by date
+```{r}
+pols_gdp = left_join(pols_mon, gdp, by = "date") %>%
+  select(date, everything())
+```
+
+
+
