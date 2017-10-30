@@ -14,7 +14,7 @@ library(janitor)
 library(ggridges, ggthemes)
 ```
 
-## Import data
+## Import data and collapse dates to the first day of the month
 
 ```{r}
 pols_mon = read_csv("./538_datasets/pols-month.csv") %>%
@@ -35,4 +35,11 @@ pols_gdp = left_join(pols_mon, gdp, by = "date") %>%
 ```
 
 
-
+## Tidy the data to be more accessible
+```{r}
+pols_gdp = pols_gdp %>%
+  drop_na() %>%
+  filter(gdp != ".") %>%
+  mutate(president = ifelse(prez_dem == 1, "dem", "gop"), gdp = as.numeric(gdp)) %>%
+  select(-prez_dem, -prez_gop)
+```
