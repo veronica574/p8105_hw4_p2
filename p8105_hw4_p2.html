@@ -123,8 +123,8 @@ $(document).ready(function () {
 </div>
 
 
-<div id="import-data" class="section level2">
-<h2>Import data</h2>
+<div id="import-data-and-collapse-dates-to-the-first-day-of-the-month" class="section level2">
+<h2>Import data and collapse dates to the first day of the month</h2>
 <pre class="r"><code>pols_mon = read_csv(&quot;./538_datasets/pols-month.csv&quot;) %&gt;%
   clean_names() %&gt;%
   mutate(date = lubridate::floor_date(mon, &quot;month&quot;)) %&gt;%
@@ -155,6 +155,14 @@ $(document).ready(function () {
 <h2>Combine two datasets by date</h2>
 <pre class="r"><code>pols_gdp = left_join(pols_mon, gdp, by = &quot;date&quot;) %&gt;%
   select(date, everything())</code></pre>
+</div>
+<div id="tidy-the-data-to-be-more-accessible" class="section level2">
+<h2>Tidy the data to be more accessible</h2>
+<pre class="r"><code>pols_gdp = pols_gdp %&gt;%
+  drop_na() %&gt;%
+  filter(gdp != &quot;.&quot;) %&gt;%
+  mutate(president = ifelse(prez_dem == 1, &quot;dem&quot;, &quot;gop&quot;), gdp = as.numeric(gdp)) %&gt;%
+  select(-prez_dem, -prez_gop)</code></pre>
 </div>
 
 
