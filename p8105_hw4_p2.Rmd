@@ -43,3 +43,15 @@ pols_gdp = pols_gdp %>%
   mutate(president = ifelse(prez_dem == 1, "dem", "gop"), gdp = as.numeric(gdp)) %>%
   select(-prez_dem, -prez_gop)
 ```
+
+
+## Plotting the GDP value over time
+
+```{r}
+pols_gdp %>%
+  ggplot(aes(x = date, y = gdp)) + geom_path(alpha = .50) +
+  geom_point(aes(color = president), alpha = .25) +
+  labs(title = "GDP values over time")
+```
+
+From the plot we can see that the GDP values varied dramatically during 1940s and 50s. The overall trend shows that GDP was increasing from 1947 to 1980 and gradually decreasing afterwards. At 2009 and 1949, there were significant dips, where GDP values were negative.
